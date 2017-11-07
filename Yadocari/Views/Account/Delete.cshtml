@@ -1,0 +1,11 @@
+﻿@model bool
+@{
+  ViewBag.Title = "ユーザーの削除";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>@(Request.Params["UserName"])の削除に@(Model ? @Html.Raw("成功") : @Html.Raw("失敗"))しました。</h3>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

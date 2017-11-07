@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity
+@using Yadocari.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @if (User.IsInRole(nameof(Role.管理)))
+                {
+                    @Html.ActionLink("こんにちは、" + User.Identity.GetUserName() + "さん", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                }
+                else
+                {
+                    <a>こんにちは、@User.Identity.GetUserName()さん</a>
+                }
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">ログオフ</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("ログイン", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
